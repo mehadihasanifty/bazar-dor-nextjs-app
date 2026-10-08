@@ -22,7 +22,7 @@ const Marquee = async () => {
   return (
     <div>
       <div className="w-full py-2">
-        <MarqueeText pauseOnHover>
+        <MarqueeText pauseOnHover direction="right">
           {data.map((item: IMarqueeProductType) => (
             <Link
               href={`/product/${item.id}`}
@@ -32,7 +32,7 @@ const Marquee = async () => {
               <p>{item.image}</p>
               <p>{item.nameBn}</p>
               <p>{`${toBengaliNumber(item.today)} টাকা/কেজি`}</p>
-              <p>
+              
                 {item.change.dir === "up" ? (
                   <div className="flex gap-1 items-center text-red-500">
                     <IoCaretUpSharp />
@@ -44,7 +44,7 @@ const Marquee = async () => {
                     <p>{toBengaliNumber(item.change.pct)} %</p>
                   </div>
                 )}
-              </p>
+              
             </Link>
           ))}
         </MarqueeText>
