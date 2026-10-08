@@ -1,12 +1,11 @@
 import { IIncreaseProductType } from "@/Types/types";
 import Image from "next/image";
-import React from "react";
 import { IoCaretUpSharp } from "react-icons/io5";
 import ProductCard from "./ProductCard";
 
 const PriceRising = async () => {
   const res = await fetch(
-    "https://api.api-store.workers.dev/api/bazardor/products",
+    "https://api.abcz.workers.dev/api/bazardor/products",
   );
   const data = await res.json();
   const increaseProducts = data.filter(
@@ -14,13 +13,6 @@ const PriceRising = async () => {
   );
 
   //   console.log(data);
-
-  const toBengaliNumber = (value: number | string) => {
-    const bengaliDigits = "০১২৩৪৫৬৭৮৯";
-    return value
-      .toString()
-      .replace(/\d/g, (digit) => bengaliDigits[Number(digit)]);
-  };
 
   return (
     <div className="my-10">
