@@ -23,10 +23,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${notoSansBengali.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col container mx-auto">
+      <body className="min-h-full flex flex-col ">
         <Header />
         <Marquee />
-        <main className="bg-base-300">{children}</main>
+        <main className="bg-base-300 w-full">{children}</main>
         <Footer />
         <Toaster />
       </body>

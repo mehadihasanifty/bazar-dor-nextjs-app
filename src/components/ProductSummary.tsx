@@ -1,4 +1,5 @@
 import { IMarketsType, IWholeProductType } from "@/Types/types";
+import { translateUnit } from "@/utils/translateUnit";
 
 interface ProductMarketSummaryProps {
   product: IWholeProductType;
@@ -16,17 +17,17 @@ const formatPrice = (price: number) => {
   return `${toBengaliNumber(formatted)} টাকা`;
 };
 
-const translateUnit = (unit: string) => {
-  const units: Record<string, string> = {
-    kg: "কেজি",
-    gram: "গ্রাম",
-    liter: "লিটার",
-    piece: "টি",
-    dozen: "ডজন",
-  };
+// const translateUnit = (unit: string) => {
+//   const units: Record<string, string> = {
+//     kg: "কেজি",
+//     gram: "গ্রাম",
+//     liter: "লিটার",
+//     piece: "টি",
+//     dozen: "ডজন",
+//   };
 
-  return units[unit.toLowerCase()] ?? unit;
-};
+//   return units[unit.toLowerCase()] ?? unit;
+// };
 
 const ProductMarketSummary = ({ product }: ProductMarketSummaryProps) => {
   const { markets, unit } = product;
@@ -35,6 +36,7 @@ const ProductMarketSummary = ({ product }: ProductMarketSummaryProps) => {
   const marketAverages = markets.map(
     (market: IMarketsType) => (market.min + market.max) / 2,
   );
+  // console.log(marketAverages);
 
   const minPrice = markets.length
     ? Math.min(...markets.map((market: IMarketsType) => market.min))
@@ -42,10 +44,12 @@ const ProductMarketSummary = ({ product }: ProductMarketSummaryProps) => {
   const maxPrice = markets.length
     ? Math.max(...markets.map((market: IMarketsType) => market.max))
     : 0;
-  const averagePrice = marketAverages.length
-    ? marketAverages.reduce((total, price) => total + price, 0) /
-      marketAverages.length
-    : 0;
+  // const averagePrice = marketAverages.length
+  //   ? marketAverages.reduce((total, price) => total + price, 0) /
+  //     marketAverages.length
+  //   : 0;
+
+  const averagePrice = markets.length > 0 ? (minPrice + maxPrice) / 2 : 0;
 
   const summaryCards = [
     {
@@ -67,9 +71,12 @@ const ProductMarketSummary = ({ product }: ProductMarketSummaryProps) => {
       color: "text-green-600",
     },
   ];
+  const sortedMarkets = [...(markets as IMarketsType[])].sort(
+    (a, b) => a.min - b.min,
+  );
 
   return (
-    <section className="rounded-2xl border border-[#dce5df] bg-white p-3 sm:p-4 lg:p-5">
+    <section className="rounded-2xl border border-[#dce5df] bg-white p-4 sm:p-5 lg:p-5">
       <h2 className="text-lg font-bold text-[#202822]">দামের সারসংক্ষেপ</h2>
 
       <div className="mt-3 grid grid-cols-1 gap-3 min-[480px]:grid-cols-2 lg:grid-cols-3">
@@ -104,7 +111,7 @@ const ProductMarketSummary = ({ product }: ProductMarketSummaryProps) => {
             </tr>
           </thead>
           <tbody>
-            {markets.map((market: IMarketsType) => {
+            {sortedMarkets.map((market: IMarketsType) => {
               const marketAverage = (market.min + market.max) / 2;
 
               return (

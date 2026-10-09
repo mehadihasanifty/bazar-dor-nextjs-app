@@ -22,10 +22,10 @@ const Marquee = async () => {
   return (
     <div>
       <div className="w-full py-2">
-        <MarqueeText pauseOnHover direction="right">
+        <MarqueeText pauseOnHover direction="right" duration={25}>
           {data.map((item: IMarqueeProductType) => (
             <Link
-              href={`/product/${item.id}`}
+              href={`/products/${item.id}`}
               key={item.id}
               className="flex gap-4 items-center px-4 py-2 border-r border-gray-300 hover:bg-gray-100 transition-all"
             >

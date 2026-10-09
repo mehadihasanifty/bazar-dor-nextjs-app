@@ -33,7 +33,8 @@ const SelectOrderProduct = ({
 
   return (
     <div className="mb-11">
-      <div className="bg-white rounded-2xl p-4 flex justify-end">
+      <div className="bg-white rounded-2xl p-4 flex items-center justify-end gap-3">
+        <p className="text-gray-500">সাজান</p>
         <select
           value={sortBy}
           onChange={(e) =>

@@ -4,9 +4,10 @@ import { IoCaretDownSharp } from "react-icons/io5";
 import ProductCard from "./ProductCard";
 
 const PriceFalling = async () => {
-  const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
-  );
+  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+  // const res = await fetch(
+  //   "https://api.api-store.workers.dev/api/bazardor/products",
+  // );
   const data = await res.json();
   const decreaseProducts = data.filter(
     (item: IDecreaseProductType) => item.change.dir === "down",
