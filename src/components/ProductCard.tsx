@@ -13,7 +13,7 @@ const ProductCard = ({ item }: IProductCardProps) => {
   const isUp = item.change.dir === "up";
 
   return (
-    <Link href={`/product/${item.id}`} className="block hover:scale-100  ">
+    <Link href={`/products/${item.id}`} className="block hover:scale-100  ">
       <div className="rounded-3xl border border-[#dce5df] bg-[#fbfdfb] p-6 shadow-sm hover:shadow-lg hover:border-2 hover:border-[#05893E] transition-transform">
         <div className="flex items-center gap-4">
           <div className="flex h-18 w-18 items-center justify-center rounded-2xl bg-[#f0f5f1] text-4xl">

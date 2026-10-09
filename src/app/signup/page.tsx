@@ -1,18 +1,27 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { redirect } from "next/navigation";
+import React from "react";``
 
 const SignUpPage = () => {
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
         e.preventDefault();
         const formData = new FormData(e.target);
-        const user = Object.fromEntries(formData.entries());
-        const {data , error} = await authClient.signUp(user.email, user.password, {
+        const user = Object.fromEntries(formData.entries()) as {name: string, email: string, password: string, confirmPassword: string};
+        const {data , error} = await authClient.signUp.email( {
             ...user,
             callbackURL: "/"
-        });
-    };
+        })
+        if(data){
+            console.log( data);
+            redirect("/");
+    }
+    if(error){
+        console.log("Error signing up user:", error);
+    }
 
+    };
     return (
         <div className="flex flex-col items-center justify-center mt-15">
             <h2 className="text-2xl font-bold text-base-content mb-2">অ্যাকাউন্ট তৈরি করুন</h2>

@@ -18,6 +18,13 @@ export interface IWholeProductType {
   markets: [];
 }
 
+export interface IMarketsType {
+  market: string;
+  division: string;
+  min: number;
+  max: number;
+}
+
 export interface INavlinksType {
   id: string;
   slug: string;
