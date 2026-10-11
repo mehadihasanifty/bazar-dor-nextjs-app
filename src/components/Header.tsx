@@ -1,22 +1,12 @@
-"use client";
-
 import Image from "next/image";
 import logo from "@/assets/logo-icon.png";
 import Link from "next/link";
+import { Suspense } from "react";
 import Navlinks from "./NavLinks";
 import UserAuthBtn from "./UserAuthBtn";
-import { useEffect, useState } from "react";
-// import BanglaDate from "./BanglaDate";
+import CurrentBanglaDate from "./CurrentBanglaDate";
 
 const Header = () => {
-      
-
- const today = new Date().toLocaleDateString("bn-BD", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-});
-
   return (
     <header className="px-4 sm:px-5 lg:px-6">
       <div className="flex justify-between items-center py-4">
@@ -34,16 +24,15 @@ const Header = () => {
               </h2>
             </Link>
             <p className="truncate text-sm sm:text-base">
-              {/* <BanglaDate /> */}
-              {today}
+              <CurrentBanglaDate />
             </p>
           </div>
         </div>
-        {/* <p className="truncate text-sm sm:text-base">{today}</p> */}
-
         <UserAuthBtn />
       </div>
-      <Navlinks />
+      <Suspense fallback={<div>Data is Loading... </div>}>
+        <Navlinks />
+      </Suspense>
     </header>
   );
 };

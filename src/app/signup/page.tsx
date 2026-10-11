@@ -18,20 +18,14 @@ const SignUpPage = () => {
     const formData = new FormData(e.target);
     const user = Object.fromEntries(formData.entries()) as {
       name: string;
+      // image: string;
       email: string;
       password: string;
       confirmPassword: string;
     };
 
-    console.log("data from the form data", user);
+    // console.log("data from the form data", user);
     // Convert FormData to plain object
-
-  const { data, error } = await authClient.signUp.email({
-  name: user.name,
-  email: user.email,
-  password: user.password,
-  callbackURL: "/",
-});
 
     if (!user.name || !user.email || !user.password || !user.confirmPassword) {
       toast.error("দয়া করে সব প্রয়োজনীয় ঘর পূরণ করুন।");
@@ -48,6 +42,14 @@ const SignUpPage = () => {
       return;
     }
 
+    const { data, error } = await authClient.signUp.email({
+      name: user.name,
+      email: user.email,
+      // image: user.image || undefined,
+      password: user.password,
+      callbackURL: "/",
+    });
+
     if (data) {
       formRef.current?.reset();
       setShowPassword(false);
@@ -62,6 +64,18 @@ const SignUpPage = () => {
     }
 
     // toast.success("আপনার একাউন্ট সফল ভাবে তৈরী হয়েছে। ");
+  };
+
+  const handleGoogleSignUp = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+    });
+  };
+
+  const handleGithubSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "github",
+    });
   };
 
   return (
@@ -84,6 +98,13 @@ const SignUpPage = () => {
                 className="input w-[280px] md:w-md"
                 placeholder="যেমন: রহিম উদ্দিন"
               />
+              {/* <label className="label">ইমেজ</label>
+              <input
+                name="image"
+                type="url"
+                className="input w-md"
+                placeholder="Image"
+              /> */}
               <label className="label text-black ">ইমেইল</label>
               <input
                 required={true}
@@ -152,11 +173,17 @@ const SignUpPage = () => {
           </form>
           <div className="divider">অথবা</div>
           <div className="flex gap-3 md:gap-2 flex-col md:flex-row">
-            <button className="btn border border-[#05893E]">
+            <button
+              onClick={handleGoogleSignUp}
+              className="btn border border-[#05893E]"
+            >
               <FcGoogle />
               Google দিয়ে চালিয়ে যান
             </button>
-            <button className="btn border border-[#05893E]">
+            <button
+              onClick={handleGithubSignIn}
+              className="btn border border-[#05893E]"
+            >
               <SiGithub />
               GitHub দিয়ে চালিয়ে যান
             </button>
@@ -185,5 +212,3 @@ const SignUpPage = () => {
 };
 
 export default SignUpPage;
-
-

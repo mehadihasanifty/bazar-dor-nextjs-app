@@ -5,6 +5,7 @@ import { Toaster } from "react-hot-toast";
 import Header from "@/components/Header";
 import Marquee from "@/components/Marquee";
 import Footer from "@/components/Footer";
+import { Suspense } from "react";
 
 const notoSansBengali = Noto_Sans_Bengali({
   variable: "--font-noto-sans-bengali",
@@ -24,8 +25,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSansBengali.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col ">
-        <Header />
-        <Marquee />
+        <Header />  
+        <Suspense
+          fallback={
+            <div>
+              Data is Loading...
+              <span className="loading loading-spinner text-success"></span>{" "}
+            </div>
+          }
+        >
+          <Marquee />
+        </Suspense>
         <main className="bg-base-300 w-full">{children}</main>
         <Footer />
         <Toaster />

@@ -1,26 +1,33 @@
 "use client";
 
-import { useState } from "react";
 import { FiUser, FiArrowLeft } from "react-icons/fi";
 import toast from "react-hot-toast";
-import Image from "next/image";
 import { authClient } from "@/lib/auth-client";
+import { FaUserCircle } from "react-icons/fa";
+import Link from "next/link";
+import Image from "next/image";
 
 export default function ProfilePage() {
   const { data: session } = authClient.useSession();
   const user = session?.user;
 
-  const handleUpdateProfile = async (e: React.SubmitEvent<HTMLElement>) => {
+  const handleUpdateProfile = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
+    const form = e.currentTarget;
+    const formData = new FormData(form);
     const newUserData = Object.fromEntries(formData.entries()) as {
       name: string;
     };
 
-    await authClient.updateUser({
+    const { error } = await authClient.updateUser({
       name: newUserData.name,
     });
 
+    if (error) {
+      toast.error("নাম আপডেট করা যায়নি।");
+      return;
+    }
+    form.reset();
     toast.success("আপনার প্রোফাইল সফলভাবে আপডেট করা হয়েছে।");
   };
 
@@ -32,7 +39,6 @@ export default function ProfilePage() {
   return (
     <main className="min-h-screen bg-[#f1f6f1] px-4 py-8 sm:px-6">
       <div className="mx-auto max-w-5xl">
-        {/* Page heading */}
         <header className="mb-7">
           <h1 className="text-2xl font-bold text-gray-800 sm:text-3xl">
             আমার প্রোফাইল
@@ -55,12 +61,12 @@ export default function ProfilePage() {
                   className="h-full w-full object-cover"
                 />
               ) : (
-                <FiUser className="h-10 w-10 text-gray-500" />
+                <FaUserCircle className="text-3xl text-gray-500" />
               )}
             </div>
 
             <div className="min-w-0">
-              <h2 className="break-words text-lg font-semibold text-gray-800 sm:text-xl">
+              <h2 className="-wrap-break-word text-lg font-semibold text-gray-800 sm:text-xl">
                 {user?.name ?? "User"}
               </h2>
               <p className="break-all text-sm text-gray-500 sm:text-base">
@@ -69,14 +75,16 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={handleSignOut}
-            className="flex w-full items-center justify-center gap-2 rounded-lg border border-red-500 px-4 py-3 text-red-600 hover:bg-red-50 sm:w-auto"
-          >
-            <FiArrowLeft />
-            সাইন আউট
-          </button>
+          <Link href="/">
+            <button
+              type="button"
+              onClick={handleSignOut}
+              className="flex w-full items-center justify-center gap-2 rounded-lg border border-red-500 px-4 py-3 text-red-600 hover:bg-red-500 hover:text-white transition-all delay-200 cursor-pointer sm:w-auto"
+            >
+              <FiArrowLeft />
+              সাইন আউট
+            </button>
+          </Link>
         </section>
 
         {/* Edit profile card */}

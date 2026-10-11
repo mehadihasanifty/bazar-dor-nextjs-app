@@ -1,7 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
-import Image from "next/image";
+
 import Link from "next/link";
 import { useState } from "react";
 import toast from "react-hot-toast";
@@ -36,9 +36,11 @@ const UserAuthBtn = () => {
             className="flex items-center gap-3 rounded-xl px-2 py-1.5 transition hover:bg-gray-100 cursor-pointer"
           >
             {user.image ? (
-              <Image
+              <img
                 src={user.image}
                 alt={user.name ?? "Profile"}
+                width={48}
+                height={48}
                 className="h-12 w-12 rounded-2xl object-cover sm:h-14 sm:w-14"
               />
             ) : (
@@ -59,9 +61,11 @@ const UserAuthBtn = () => {
             <div className="absolute right-0 top-full mt-3 w-72 rounded-2xl border border-gray-200 bg-white p-4 shadow-xl">
               <div className="flex items-center gap-3 border-b border-gray-100 pb-4">
                 {user.image ? (
-                  <Image
+                  <img
                     src={user.image}
                     alt={user.name ?? "Profile"}
+                    width={48}
+                    height={48}
                     className="h-12 w-12 rounded-full object-cover"
                   />
                 ) : (
@@ -87,14 +91,15 @@ const UserAuthBtn = () => {
                 {/* <FaUserLarge /> */}
                 আমার প্রোফাইল
               </Link>
-
-              <button
-                type="button"
-                onClick={handleSignout}
-                className="mt-2 w-full rounded-lg  px-3 py-2 text-left text-sm font-medium text-red-600 transition cursor-pointer hover:bg-red-100"
-              >
-                ↩ সাইন আউট
-              </button>
+              <Link href="/">
+                <button
+                  type="button"
+                  onClick={handleSignout}
+                  className="mt-2 w-full rounded-lg  px-3 py-2 text-left text-sm font-medium text-red-600 transition cursor-pointer hover:bg-red-200"
+                >
+                  ↩ সাইন আউট
+                </button>
+              </Link>
             </div>
           )}
         </div>
@@ -119,4 +124,3 @@ const UserAuthBtn = () => {
 };
 
 export default UserAuthBtn;
-
