@@ -5,11 +5,13 @@ import { IoCaretUpSharp, IoCaretDownSharp } from "react-icons/io5";
 import MarqueeText from "react-marquee-text";
 
 const Marquee = async () => {
+  // const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
   const res = await fetch(
-    "https://api.abcz.workers.dev/api/bazardor/products",
+    "https://openapi.programming-hero.com/api/bazardor/products",
   );
   const data = await res.json();
   console.log(data);
+  console.log(data.id);
 
   const toBengaliNumber = (value: number | string) => {
     const bengaliDigits = "০১২৩৪৫৬৭৮৯";
@@ -32,19 +34,34 @@ const Marquee = async () => {
               <p>{item.image}</p>
               <p>{item.nameBn}</p>
               <p>{`${toBengaliNumber(item.today)} টাকা/কেজি`}</p>
-              
-                {item.change.dir === "up" ? (
-                  <div className="flex gap-1 items-center text-red-500">
-                    <IoCaretUpSharp />
-                    <p>{toBengaliNumber(item.change.pct)} %</p>
-                  </div>
-                ) : (
-                  <div className="flex gap-1 items-center text-green-500">
-                    <IoCaretDownSharp />
-                    <p>{toBengaliNumber(item.change.pct)} %</p>
-                  </div>
-                )}
-              
+
+              {item.change.dir === "up" ? (
+                <div className="flex items-center gap-1 text-red-500">
+                  <IoCaretUpSharp />
+                  <p>{toBengaliNumber(item.change.pct.toFixed(1))}%</p>
+                </div>
+              ) : item.change.dir === "down" ? (
+                <div className="flex items-center gap-1 text-green-500">
+                  <IoCaretDownSharp />
+                  <p>{toBengaliNumber(item.change.pct.toFixed(1))}%</p>
+                </div>
+              ) : (
+                <div className="flex items-center gap-1 text-gray-500">
+                  <p>{toBengaliNumber(item.change.pct.toFixed(1))}%</p>
+                </div>
+              )}
+
+              {/* {item.change.dir === "up" ? (
+                <div className="flex gap-1 items-center text-red-500">
+                  <IoCaretUpSharp />
+                  <p>{toBengaliNumber(item.change.pct)} %</p>
+                </div>
+              ) : (
+                <div className="flex gap-1 items-center text-green-500">
+                  <IoCaretDownSharp />
+                  <p>{toBengaliNumber(item.change.pct)} %</p>
+                </div>
+              )} */}
             </Link>
           ))}
         </MarqueeText>

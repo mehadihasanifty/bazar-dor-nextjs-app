@@ -11,7 +11,7 @@ const HeroBanner = () => {
   return (
     <div className="flex flex-col lg:flex-row justify-between items-center gap-4 py-6 bg-white px-6 rounded-2xl mt-6 mb-12">
       <div className="space-y-4 py-6 text-center lg:text-left">
-        <div className="bg-green-200 inline text-[#05893E] p-2 rounded-2xl font-semibold ">
+        <div className="bg-green-200 inline text-[#05893E] p-2 rounded-2xl font-semibold text-sm md:text-base">
           {date}
         </div>
         <h1 className="mt-8 text-lg md:text-xl lg:text-3xl xl:text-4xl font-bold">

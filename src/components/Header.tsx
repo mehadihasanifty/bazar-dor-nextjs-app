@@ -1,17 +1,24 @@
+"use client";
+
 import Image from "next/image";
 import logo from "@/assets/logo-icon.png";
 import Link from "next/link";
 import Navlinks from "./NavLinks";
 import UserAuthBtn from "./UserAuthBtn";
+import { useEffect, useState } from "react";
 // import BanglaDate from "./BanglaDate";
 
 const Header = () => {
-  const date = new Date().toLocaleDateString("bn-BD", {
-    dateStyle: "full",
-  });
+      
+
+ const today = new Date().toLocaleDateString("bn-BD", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 
   return (
-    <header className="px-4 sm:px-5 lg:px-6 bg-base-300 ">
+    <header className="px-4 sm:px-5 lg:px-6">
       <div className="flex justify-between items-center py-4">
         <div className="flex  gap-2 min-w-0 items-center sm:gap-3">
           <Link
@@ -28,11 +35,11 @@ const Header = () => {
             </Link>
             <p className="truncate text-sm sm:text-base">
               {/* <BanglaDate /> */}
-              {date}
+              {today}
             </p>
           </div>
         </div>
-        {/* <p className="truncate text-sm sm:text-base">{date}</p> */}
+        {/* <p className="truncate text-sm sm:text-base">{today}</p> */}
 
         <UserAuthBtn />
       </div>

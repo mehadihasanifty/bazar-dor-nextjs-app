@@ -3,8 +3,8 @@ import React from "react";
 import { IoCaretDownSharp } from "react-icons/io5";
 import ProductCard from "./ProductCard";
 
-const PriceFalling = async () => {
-  const res = await fetch("https://api.abcz.workers.dev/api/bazardor/products");
+const PriceDecrease = async () => {
+  const res = await fetch("https://openapi.programming-hero.com/api/bazardor/products");
   // const res = await fetch(
   //   "https://api.api-store.workers.dev/api/bazardor/products",
   // );
@@ -27,4 +27,4 @@ const PriceFalling = async () => {
   );
 };
 
-export default PriceFalling;
+export default PriceDecrease;

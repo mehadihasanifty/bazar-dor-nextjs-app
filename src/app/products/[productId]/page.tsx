@@ -14,7 +14,7 @@ const ProductDetailPage = async ({
   const { productId } = await params;
 
   const res = await fetch(
-    `https://api.abcz.workers.dev/api/bazardor/products/${productId}`,
+    `https://openapi.programming-hero.com/api/bazardor/products/${productId}`,
   );
   if (!res.ok) {
     throw new Error("Failed to fetch product");
@@ -36,7 +36,7 @@ const ProductDetailPage = async ({
   return (
     <div className="mt-8">
       <div className="flex items-center gap-2 text-lg text-[#757979] mb-8">
-        <Link href="/" className="hover:text-[#05893E]">
+        <Link href="/" className="hover:text-[#05893E] hover:underline">
           হোম
         </Link>
         <IoChevronForward className="text-sm" />
@@ -47,7 +47,7 @@ const ProductDetailPage = async ({
           {product.categoryNameBn}
         </Link>
         <IoChevronForward className="text-sm" />
-        <span>{product.nameBn}</span>
+        <span className="hover:text-[#05893E]">{product.nameBn}</span>
       </div>
       {/* ----- div --- or card ---------------------*/}
       <div className="flex flex-col gap-4 lg:flex-row items-center justify-between rounded-3xl border border-[#dce5df] bg-white p-6 shadow-sm mb-8">
