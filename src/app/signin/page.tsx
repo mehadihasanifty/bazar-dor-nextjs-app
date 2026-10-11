@@ -84,19 +84,14 @@ const SignInPage = () => {
                   placeholder="কমপক্ষে ৮ অক্ষর"
                 />
 
-                <button
-  type="button"
-  onClick={() => setShowPassword((prev) => !prev)}
-  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer text-gray-500 transition-colors duration-200 hover:text-[#05893E] focus:outline-none focus:text-[#05893E]"
-  aria-label={showPassword ? "Hide password" : "Show password"}
-  aria-pressed={showPassword}
->
-  {showPassword ? (
-    <IoEyeOff size={20} />
-  ) : (
-    <IoEye size={20} />
-  )}
-</button>
+                  <button
+                     type="button"
+                     onClick={() => setShowPassword(!showPassword)}
+                     className="absolute top-1/2 right-3 -translate-y-1/2 text-gray-500 hover:text-[#05893E] cursor-pointer"
+                     aria-label={showPassword ? "Hide password" : "Show password"}
+                   >
+                     {showPassword ? <IoEyeOff size={20} /> : <IoEye size={20} />}
+                   </button>
               </div>
               <button
                 type="submit"
