@@ -47,15 +47,17 @@ const SignUpPage = () => {
       email: user.email,
       // image: user.image || undefined,
       password: user.password,
-      callbackURL: "/",
+      callbackURL: "/sigin",
     });
 
     if (data) {
       formRef.current?.reset();
       setShowPassword(false);
       setShowConfirmPassword(false);
-      toast.success("আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে।");
-      redirect("/");
+      toast.success(
+        "আপনার অ্যাকাউন্ট সফলভাবে তৈরি হয়েছে। অনুগ্রহ করে সাইন ইন করুন।",
+      );
+      redirect("/signin");
     }
 
     if (error) {
@@ -89,13 +91,13 @@ const SignUpPage = () => {
         </div>
         <div className=" rounded-2xl bg-white p-5 md:p-7 mb-8">
           <form ref={formRef} onSubmit={handleOnSubmit} noValidate>
-            <fieldset className="fieldset border-base-300 rounded-xl w-[280px] md:w-md ">
+            <fieldset className="fieldset border-base-300 rounded-xl w-70 md:w-md ">
               <label className="label text-black ">নাম</label>
               <input
                 required={true}
                 name="name"
                 type="text"
-                className="input w-[280px] md:w-md"
+                className="input w-70 md:w-md"
                 placeholder="যেমন: রহিম উদ্দিন"
               />
               {/* <label className="label">ইমেজ</label>
@@ -110,7 +112,7 @@ const SignUpPage = () => {
                 required={true}
                 name="email"
                 type="email"
-                className="input w-[280px] md:w-md"
+                className="input w-70 md:w-md"
                 placeholder="you@example.com"
               />
               <label className="label mt-2 text-black">পাসওয়ার্ড</label>
@@ -120,7 +122,7 @@ const SignUpPage = () => {
                   placeholder="কমপক্ষে ৮ অক্ষর"
                 /> */}
 
-              <div className="relative w-[280px] md:w-md">
+              <div className="relative w-70 md:w-md">
                 <input
                   required={true}
                   name="password"
@@ -141,7 +143,7 @@ const SignUpPage = () => {
               <label className="label mt-2 text-black">
                 পাসওয়ার্ড নিশ্চিত করুন
               </label>
-              <div className="relative w-[280px] md:w-md">
+              <div className="relative w-70 md:w-md">
                 <input
                   required={true}
                   name="confirmPassword"

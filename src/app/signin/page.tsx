@@ -1,4 +1,5 @@
 "use client";
+
 import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
 import React, { useRef, useState } from "react";
@@ -60,12 +61,12 @@ const SignInPage = () => {
         </div>
         <div className=" rounded-2xl bg-white p-5 md:p-7 mb-8">
           <form onSubmit={handleOnSubmit} ref={formRef} noValidate>
-            <fieldset className="fieldset border-base-300 rounded-xl w-[280px] md:w-md ">
+            <fieldset className="fieldset border-base-300 rounded-xl w-70 md:w-md ">
               <label className="label text-black ">ইমেইল</label>
               <input
                 name="email"
                 type="email"
-                className="input w-[280px] md:w-md"
+                className="input w-70 md:w-md"
                 placeholder="you@example.com"
               />
               <label className="label mt-2 text-black">পাসওয়ার্ড</label>
@@ -75,7 +76,7 @@ const SignInPage = () => {
               placeholder="কমপক্ষে ৮ অক্ষর"
             /> */}
 
-              <div className="relative w-[280px] md:w-md">
+              <div className="relativew-70 md:w-md">
                 <input
                   name="password"
                   type={showPassword ? "text" : "password"}
